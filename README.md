@@ -1,55 +1,54 @@
-# S3-Web-Hosting
+# My DevOps Portfolio - AWS S3 Static Website Project
 
-DevOps S3 Web Hosting Assignment
+I built a personal portfolio website to showcase my DevOps skills and hosted it on AWS S3. This project let me practice both front-end design and AWS cloud configuration.
 
-1. Static Portfolio Website Development
-Build a simple DevOps portfolio website using HTML (and optional CSS). Your site must
-include:
- - Your name and role (e.g., DevOps Engineer)
- - Skills list
- - Certifications
- - Project descriptions
- - Contact information or LinkedIn link
+## Site Customisation
+I wasn't a fan of the original template's look, so I made several changes to create something that better represents me:
 
-Customise the design by changing colours, layout, sections, and text to reflect your personal
-brand.
+- Switched to a more subtle blue-grey gradient background that looks more professional
+- Used Montserrat and Roboto fonts from Google Fonts instead of the basic ones
+- Made the skills and certifications display in a nice grid layout
+- Added hover effects to make the site feel more interactive
+- Fixed the spacing and padding to give everything room to breathe
 
-2. S3 Static Website Hosting
-Create a new S3 bucket and:
-- Enable static website hosting
-- Set index.html as the default page
-- Upload your customised portfolio files
-- Make the site public using a bucket policy only (do not enable public access manually)
-- Share the S3 static website URL
 
-3. Bucket Policy Configuration
-Apply a bucket policy that grants public read access only to the objects in the bucket.
-Paste the bucket policy used and explain what each part of it does.
+- Updated everything with my name (Chibuzo Nmecha)
+- Added some specific achievements, like how I reduced deployment times by 40%
+- Added AWS Cloud Practitioner cert
+- Updated my contact info with my real email and GitHub
 
-4. Lifecycle Rule Setup
-Create a lifecycle rule on your S3 bucket to:
+## AWS Configuration
 
-- Transition objects to GLACIER storage after 30 days
-- Delete objects after 180 days
+1. Created a unique S3 bucket
+2. Turned on static website hosting and set index.html as the main page
+3. Uploaded all my website files
 
-Take a screenshot of your lifecycle rule configuration and explain the rule briefly.
+For security, I used a bucket policy instead of just making everything public:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::my-portfolio-bucket/*"
+    }
+  ]
+}
+```
+This lets people view my site but doesn't let them mess with my files.
 
-5. DNS Customisation (Bonus)
-(Optional, extra credit)
-Use a domain or subdomain from Route 53 (or any free DNS provider) to point to your S3
-Website by:
-- Creating a CNAME or Alias record to map your domain to the S3 website endpoint
-Provide a screenshot of your DNS record configuration and the custom domain in use.
+I also set up a lifecycle rule to save on storage costs:
+- Move files to GLACIER after 30 days (cheaper storage)
+- Delete them after 180 days (so I remember to keep content fresh)
 
-6. Submission Requirements
-Include the following in your submission:
-- Screenshots showing:
-o S3 bucket with static hosting enabled
-o Bucket policy applied
-o Lifecycle rule created
-o Website working in the browser
-o (Optional) DNS alias/custom domain working
+For the bonus part, I did not configure a custom subdomain using Route 53.
 
-- A short text or README file explaining what you changed in your site and setup
-- URL link to your portfolio
-
+## What I Learned
+This project helped me practice:
+- Working with S3 buckets and permissions
+- Writing IAM policies
+- Building and customising websites
+- Managing storage lifecycles
